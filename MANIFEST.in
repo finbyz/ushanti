@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include ushanti *.css
+recursive-include ushanti *.csv
+recursive-include ushanti *.html
+recursive-include ushanti *.ico
+recursive-include ushanti *.js
+recursive-include ushanti *.json
+recursive-include ushanti *.md
+recursive-include ushanti *.png
+recursive-include ushanti *.py
+recursive-include ushanti *.svg
+recursive-include ushanti *.txt
+recursive-exclude ushanti *.pyc
