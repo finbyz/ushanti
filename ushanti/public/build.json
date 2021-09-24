@@ -1,0 +1,6 @@
+{
+	"js/ushanti.min.js": [
+		"public/js/transaction.js",
+		"public/js/doctype_js/sales_invoice.js"
+    ]
+}

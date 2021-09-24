@@ -1,9 +1,9 @@
 from . import __version__ as app_version
 
 app_name = "ushanti"
-app_title = "Ushanti"
+app_title = "ushanti"
 app_publisher = "FinByz Tech Pvt. Ltd."
-app_description = "Ushanti"
+app_description = "Custom app for ushanti"
 app_icon = "octicon octicon-file-directory"
 app_color = "blue"
 app_email = "info@finbyz.com"
@@ -15,6 +15,8 @@ app_license = "MIT"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/ushanti/css/ushanti.css"
 # app_include_js = "/assets/ushanti/js/ushanti.js"
+
+app_include_js = "/assets/js/ushanti.min.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/ushanti/css/ushanti.css"
@@ -35,6 +37,11 @@ app_license = "MIT"
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+
+doctype_js = {
+	"Sales Invoice" : "public/js/doctype_js/sales_invoice.js",
+	"Journal Entry" : "public/js/doctype_js/journal_entry.js"
+	}
 
 # Home Pages
 # ----------
@@ -89,13 +96,16 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
+	"Ball Mill Data Sheet":{
+		"before_save":'ushanti.api.cal_handling_loss'
+		},
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 #	}
-# }
+}
 
 # Scheduled Tasks
 # ---------------
