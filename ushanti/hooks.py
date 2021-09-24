@@ -191,3 +191,7 @@ tds_computation_summary.execute = tds_computation_summary_execute
 from erpnext.accounts.report.tds_payable_monthly import tds_payable_monthly
 from ushanti.ushanti.report.tds_payable_monthly import execute as tds_payable_monthly_execute
 tds_payable_monthly.execute = tds_payable_monthly_execute
+
+from erpnext.regional.doctype.gstr_3b_report.gstr_3b_report import GSTR3BReport
+from ushanti.ushanti.report.gstr_3b_report import GSTR3BReport as custom_GSTR3BReport
+GSTR3BReport.validate = custom_GSTR3BReport.validate

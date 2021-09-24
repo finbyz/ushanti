@@ -43,6 +43,7 @@ frappe.ui.form.on('Journal Entry', {
                 },
                 callback: function(r){
                     if(r.message){
+                        console.log(r.message)
                         frm.set_value('party_address', r.message[frappe.scrub(frm.doc.party_type) + "_address"])
                         frm.set_value('address_display', r.message.address_display)
                         frm.set_value('contact_person', r.message.contact_person)
@@ -61,6 +62,11 @@ frappe.ui.form.on('Journal Entry', {
     },
     party_address: function(frm) {
         erpnext.utils.get_address_display(frm);
+        frappe.db.get_value('Address',frm.doc.party_address,"gstin", function(p){
+            if (p.gstin){
+                frm.set_value('party_gstin',p.gstin)
+            }
+        })
     },
 	contact_person: function(frm) {
 		erpnext.utils.get_contact_details(frm);
