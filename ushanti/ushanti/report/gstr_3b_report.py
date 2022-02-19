@@ -130,10 +130,19 @@ def get_itc_details(self):
 			'csamt': d.itc_cess_amount
 		})
 
-	itc_details['All Other ITC']['iamt'] +=  flt(itc_igst_acc_amount)
-	itc_details['All Other ITC']['camt'] +=  flt(itc_cgst_acc_amount)
-	itc_details['All Other ITC']['samt'] +=  flt(itc_sgst_acc_amount)
-	itc_details['All Other ITC']['csamt'] +=  flt(itc_cess_acc_amount)
+	if itc_details:
+		itc_details['All Other ITC']['iamt'] +=  flt(itc_igst_acc_amount)
+		itc_details['All Other ITC']['camt'] +=  flt(itc_cgst_acc_amount)
+		itc_details['All Other ITC']['samt'] +=  flt(itc_sgst_acc_amount)
+		itc_details['All Other ITC']['csamt'] +=  flt(itc_cess_acc_amount)
+	else:
+		itc_details.setdefault('All Other ITC', {
+			'iamt': flt(itc_igst_acc_amount),
+			'camt': flt(itc_cgst_acc_amount),
+			'samt': flt(itc_sgst_acc_amount),
+			'csamt': flt(itc_cess_acc_amount)
+		})
+
 	return itc_details
 
 def get_inward_nil_exempt(self, state):

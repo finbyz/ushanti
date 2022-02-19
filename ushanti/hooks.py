@@ -100,6 +100,9 @@ doc_events = {
 	"Ball Mill Data Sheet":{
 		"before_save":'ushanti.api.cal_handling_loss'
 		},
+	"Work Order":{
+		"before_cancel": "ushanti.api.work_order_before_cancel"
+	},
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
