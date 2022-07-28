@@ -119,9 +119,14 @@ def get_result(filters, payment_entries):
 				tds_deducted = (k.credit - k.debit)
 				total_amount_credited += (k.credit - k.debit)
 			voucher_type = k.voucher_type
+		rate =[]
+		for i in tds_doc.rates:
+			for row in gle_map[d]:
+				if row.get('posting_date') >= i.from_date and row.get('posting_date')<= i.to_date:
+					rate.append(i.tax_withholding_rate)
 
-		rate = [i.tax_withholding_rate for i in tds_doc.rates
-			if i.fiscal_year == gle_map[d][0].fiscal_year]
+		# rate = [i.tax_withholding_rate for i in tds_doc.rates
+		# 	if i.fiscal_year == gle_map[d][0].fiscal_year]
 
 		if rate and len(rate) > 0 and tds_deducted:
 			rate = rate[0]
@@ -134,7 +139,7 @@ def get_result(filters, payment_entries):
 			row.extend([tds_doc.name, supplier.supplier_type, rate, total_amount_credited,
 				tds_deducted, gle_map[d][0].posting_date, voucher_type, d])
 			out.append(row)
-
+			
 	return out
 
 def get_supplier_map(filters, payment_entries):
