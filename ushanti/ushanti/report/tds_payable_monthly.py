@@ -33,12 +33,12 @@ def execute(filters=None):
 		jv_query = frappe.db.sql("""
 			select
 				jv.name as voucher_no, jv.pan, jv.party_type, jv.party, jv.posting_date, jv.tds_section_code,twr.tax_withholding_rate,
-				sup.supplier_type,gle.credit as gl_amount
+				sup.supplier_type,gle.credit ,gle.debit
 			from
 				`tabJournal Entry` as jv
 				JOIN `tabGL Entry` as gle on gle.voucher_no = jv.name
 				JOIN `tabTax Withholding Account` as twa on twa.parent = jv.tds_section_code and jv.company = twa.company
-				JOIN `tabTax Withholding Rate` as twr on twr.parent = jv.tds_section_code and twr.fiscal_year = gle.fiscal_year
+				JOIN `tabTax Withholding Rate` as twr on twr.parent = jv.tds_section_code
 				JOIN `tabSupplier` as sup on sup.name = jv.party
 			where
 				jv.docstatus = 1 and gle.is_cancelled = 0 and jv.tds_section_code is not null and jv.pan is not null and jv.party_type = 'Supplier' and jv.party is not null
@@ -47,7 +47,11 @@ def execute(filters=None):
 
 		new_data = []
 		for row in jv_query:
-			new_data.append([row.pan,row.party,row.tds_section_code,row.supplier_type,row.tax_withholding_rate,row.gl_amount,row.gl_amount,row.posting_date,'Journal Entry',row.voucher_no])
+			if row.credit:
+				gl_amount = row.credit
+			else:
+				gl_amount = row.debit
+			new_data.append([row.pan,row.party,row.tds_section_code,row.supplier_type,row.tax_withholding_rate,gl_amount,gl_amount,row.posting_date,'Journal Entry',row.voucher_no])
 
 		res +=  new_data
 	

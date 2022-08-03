@@ -1,0 +1,14 @@
+data = frappe.db.sql("""
+    SELECT
+        dni.si_detail, dni.name,dni.warehouse as d_warehouse, sii.warehouse as s_warehouse, dni.creation
+    FROM 
+        `tabDelivery Note Item` as dni
+        LEFT JOIN `tabSales Invoice Item` as sii on sii.name = dni.si_detail
+        LEFT JOIN `tabSales Invoice` as si on dni.against_sales_invoice = si.name and si.update_stock != 1
+    WHERE
+        dni.si_detail IS NOT NULL and dni.docstatus != 2 and sii.warehouse != dni.warehouse
+""", as_dict = 1)
+
+for row in data:
+    print(row.s_warehouse, row.d_warehouse)
+    frappe.db.set_value("Sales Invoice Item", row.si_detail, "warehouse", row.d_warehouse, update_modified = False)
