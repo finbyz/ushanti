@@ -1,4 +1,8 @@
 from . import __version__ as app_version
+from ushanti.api import autoname
+from finbyzerp.finbyzerp.doctype.bank_statement_transaction_entry.bank_statement_transaction_entry import BankStatementTransactionEntry
+
+BankStatementTransactionEntry.autoname =  autoname
 
 app_name = "ushanti"
 app_title = "ushanti"
@@ -31,6 +35,11 @@ app_include_js = "/assets/js/ushanti.min.js"
 
 # include js in page
 # page_js = {"page" : "public/js/file.js"}
+
+
+override_doctype_class = {
+	"Bank Clearance": "ushanti.bank_clearance_ovverride.CustomBankClearance"
+}
 
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
@@ -103,6 +112,17 @@ doc_events = {
 	"Work Order":{
 		"before_cancel": "ushanti.api.work_order_before_cancel"
 	},
+	"Bank Statement Transaction Entry":{
+		"validate":"ushanti.ushanti.doc_event.bank_statement_transaction_entry.validate",
+		"on_submit":"ushanti.ushanti.doc_event.bank_statement_transaction_entry.on_submit"
+	},
+	"Salary Slip":{
+		'validate':"ushanti.api.set_base_amount_in_ss",
+		"on_submit":"ushanti.api.set_total_of_esic_diduction"
+	},
+	"Rodtap Claimed Management":{
+		"on_submit":"ushanti.ushanti.doctype.rodtap_claimed_management.rodtap_claimed_management.create_jv_on_submit"
+	},
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
@@ -113,13 +133,13 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"ushanti.tasks.all"
 # 	],
-# 	"daily": [
-# 		"ushanti.tasks.daily"
-# 	],
+	"daily": [
+		"ushanti.api.sales_invoice_payment_remainder"
+	],
 # 	"hourly": [
 # 		"ushanti.tasks.hourly"
 # 	],
@@ -129,7 +149,7 @@ doc_events = {
 # 	"monthly": [
 # 		"ushanti.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------
@@ -143,6 +163,9 @@ doc_events = {
 # 	"frappe.desk.doctype.event.event.get_events": "ushanti.event.get_events"
 # }
 #
+# override_whitelisted_methods = {
+# 	"erpnext.selling.doctype.sales_order.sales_order.make_sales_invoice": "ushanti.ushanti.doc_event.sales_order.make_sales_invoice"
+# }
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
@@ -198,3 +221,11 @@ tds_computation_summary.execute = tds_computation_summary_execute
 from erpnext.regional.doctype.gstr_3b_report.gstr_3b_report import GSTR3BReport
 from ushanti.ushanti.report.gstr_3b_report import GSTR3BReport as custom_GSTR3BReport
 GSTR3BReport.validate = custom_GSTR3BReport.validate
+
+from erpnext.regional.report.provident_fund_deductions import provident_fund_deductions
+from ushanti.ushanti.report.provident_fund_deductions import execute as override_report_execute
+provident_fund_deductions.execute = override_report_execute
+
+from erpnext.selling.doctype.sales_order import sales_order
+from ushanti.ushanti.doc_event.sales_order import make_sales_invoice
+sales_order.make_sales_invoice = make_sales_invoice
