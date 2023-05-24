@@ -129,12 +129,13 @@ def get_itc_details(self):
 			'samt': d.itc_state_tax,
 			'csamt': d.itc_cess_amount
 		})
-
+	
 	if itc_details:
-		itc_details['All Other ITC']['iamt'] +=  flt(itc_igst_acc_amount)
-		itc_details['All Other ITC']['camt'] +=  flt(itc_cgst_acc_amount)
-		itc_details['All Other ITC']['samt'] +=  flt(itc_sgst_acc_amount)
-		itc_details['All Other ITC']['csamt'] +=  flt(itc_cess_acc_amount)
+		if itc_details.get('All Other ITC'):
+			itc_details['All Other ITC']['iamt'] +=  flt(itc_igst_acc_amount)
+			itc_details['All Other ITC']['camt'] +=  flt(itc_cgst_acc_amount)
+			itc_details['All Other ITC']['samt'] +=  flt(itc_sgst_acc_amount)
+			itc_details['All Other ITC']['csamt'] +=  flt(itc_cess_acc_amount)
 	else:
 		itc_details.setdefault('All Other ITC', {
 			'iamt': flt(itc_igst_acc_amount),

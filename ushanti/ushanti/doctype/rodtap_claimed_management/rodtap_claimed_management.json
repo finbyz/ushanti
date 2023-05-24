@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:script_number",
+ "creation": "2023-02-25 11:15:16.270533",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "script_number",
+  "posting_date",
+  "start_date",
+  "get_rodtap_entries",
+  "column_break_2",
+  "company",
+  "end_date",
+  "amended_from",
+  "rodtap_entries_details_section",
+  "rodtap_details",
+  "section_break_11",
+  "script_amount",
+  "credit_account",
+  "column_break_14",
+  "total_debit_amount",
+  "journal_entry_ref"
+ ],
+ "fields": [
+  {
+   "fieldname": "script_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Script Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "no_copy": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "get_rodtap_entries",
+   "fieldtype": "Button",
+   "label": "Get Rodtap Entries"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rodtap Claimed Management",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rodtap_entries_details_section",
+   "fieldtype": "Section Break",
+   "label": "Rodtap Entries Details"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rodtap_details",
+   "fieldtype": "Table",
+   "label": "Rodtap Details",
+   "options": "Rodtap Details"
+  },
+  {
+   "fieldname": "section_break_11",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "script_amount",
+   "fieldtype": "Currency",
+   "label": "Script Amount"
+  },
+  {
+   "fieldname": "credit_account",
+   "fieldtype": "Link",
+   "label": "Credit Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_debit_amount",
+   "fieldtype": "Currency",
+   "label": "Total Debit Amount"
+  },
+  {
+   "fieldname": "journal_entry_ref",
+   "fieldtype": "Link",
+   "label": "Journal Entry Ref",
+   "options": "Journal Entry",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-02-25 15:40:46.413346",
+ "modified_by": "Administrator",
+ "module": "Ushanti",
+ "name": "Rodtap Claimed Management",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
