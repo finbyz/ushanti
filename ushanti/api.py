@@ -67,11 +67,12 @@ def send_sales_invoice_mails():
 						<th width="12%" valign="top">Bill Date</th>
 						<th width="21%" valign="top">Order No</th>
 						<th width="15%" valign="top">Order Date</th>
+						<th width="15%" valign="top">Net Total</th>
 						<th width="16%" valign="top">Actual Amt</th>
 						<th width="18%" valign="top">Rem. Amt</th>
 					</tr></thead><tbody>"""
 				
-	def table_content(name, posting_date, po_no, po_date, rounded_total, outstanding_amount):
+	def table_content(name, posting_date, po_no, po_date,net_total, grand_total, outstanding_amount):
 		posting_date = posting_date.strftime("%d-%m-%Y") if bool(posting_date) else '-'
 		po_date = po_date.strftime("%d-%m-%Y") if bool(po_date) else '-'
 
@@ -83,9 +84,10 @@ def send_sales_invoice_mails():
 				<td width="12%" valign="top"> {1} </td>
 				<td width="21%" valign="top"> {2} </td>
 				<td width="15%" valign="top"> {3} </td>
-				<td width="16%" valign="top" align="right"> {4} </td>
-				<td width="18%" valign="top" align="right"> {5} </td>
-			</tr>""".format(name, posting_date, po_no or '-', po_date, rounded_total, outstanding_amount)
+				<td width="15%" valign="top"> {4} </td>
+				<td width="16%" valign="top" align="right"> {5} </td>
+				<td width="18%" valign="top" align="right"> {6} </td>
+			</tr>""".format(name, posting_date, po_no or '-', po_date,net_total, grand_total, outstanding_amount)
 
 	def footer(actual_amount, outstanding_amount):
 		actual_amt = fmt_money(sum(actual_amount), 2, 'INR')
@@ -145,12 +147,12 @@ def send_sales_invoice_mails():
 			if si.naming_series != "PI-":
 				name = si.name
 				try:
-					attachments.append(frappe.attach_print('Sales Invoice', si.name, print_format="Sales Invoice", print_letterhead=True))
+					attachments.append(frappe.attach_print('Sales Invoice', si.name, print_format="Domestic Sales Invoice", print_letterhead=True))
 				except:
 					pass
 
-			table += table_content(name, si.posting_date, si.po_no, si.po_date,
-						si.rounded_total, si.outstanding_amount)
+			table += table_content(name, si.posting_date, si.po_no, si.po_date,si.net_total,
+						si.grand_total, si.outstanding_amount)
 
 			outstanding.append(si.outstanding_amount)
 			actual_amount.append(si.rounded_total or 0.0)
