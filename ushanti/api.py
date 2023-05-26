@@ -76,7 +76,7 @@ def send_sales_invoice_mails():
 		posting_date = posting_date.strftime("%d-%m-%Y") if bool(posting_date) else '-'
 		po_date = po_date.strftime("%d-%m-%Y") if bool(po_date) else '-'
 
-		rounded_total = fmt_money(rounded_total, 2, 'INR')
+		grand_total = fmt_money(grand_total, 2, 'INR')
 		outstanding_amount = fmt_money(outstanding_amount, 2, 'INR')
 
 		return """<tr>
