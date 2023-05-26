@@ -75,7 +75,7 @@ def send_sales_invoice_mails():
 	def table_content(name, posting_date, po_no, po_date,net_total, grand_total, outstanding_amount):
 		posting_date = posting_date.strftime("%d-%m-%Y") if bool(posting_date) else '-'
 		po_date = po_date.strftime("%d-%m-%Y") if bool(po_date) else '-'
-
+		print(grand_total)
 		grand_total = fmt_money(grand_total,  'INR')
 		outstanding_amount = fmt_money(outstanding_amount, 'INR')
 
