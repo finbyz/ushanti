@@ -143,6 +143,7 @@ def send_sales_invoice_mails():
 		customer_si = get_customer_si(customer)
 
 		for si in customer_si:
+			print(si)
 			name = "Previous Year Outstanding"
 			if si.naming_series != "PI-":
 				name = si.name
