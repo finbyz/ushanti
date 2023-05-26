@@ -150,7 +150,7 @@ def send_sales_invoice_mails():
 					attachments.append(frappe.attach_print('Sales Invoice', si.name, print_format="Domestic Sales Invoice", print_letterhead=True))
 				except:
 					pass
-
+			print(si.grand_total)
 			table += table_content(name, si.posting_date, si.po_no, si.po_date,si.net_total,
 						si.grand_total, si.outstanding_amount)
 
