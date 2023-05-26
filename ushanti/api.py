@@ -118,7 +118,7 @@ def send_sales_invoice_mails():
 			'docstatus': 1,
 			'customer': ['not in', non_customers],},
 			order_by='posting_date',
-			fields=["name", "customer", "posting_date", "po_no", "po_date", "rounded_total", "outstanding_amount", "contact_email", "naming_series"])
+			fields=["name", "customer", "posting_date", "po_no", "po_date", "rounded_total", "outstanding_amount", "contact_email", "naming_series" , "grand_total"])
 
 	def get_customers():
 		customers_list = list(set([d.customer for d in data if d.customer]))
