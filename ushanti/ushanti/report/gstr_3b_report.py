@@ -12,8 +12,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import cstr, flt
 from six import iteritems
-
-from erpnext.regional.india import state_numbers
+from india_compliance.gst_india.constants import STATE_NUMBERS
 
 
 class GSTR3BReport(Document):
@@ -537,7 +536,7 @@ def get_json(template):
 		return cstr(f.read())
 
 def get_state_code(state):
-	state_code = state_numbers.get(state)
+	state_code = STATE_NUMBERS.get(state)
 
 	return state_code
 

@@ -5,7 +5,7 @@ from frappe import _
 from frappe.utils import flt
 from erpnext.accounts.utils import get_fiscal_year
 from erpnext.accounts.doctype.tax_withholding_category.tax_withholding_category \
-	import get_advance_vouchers, get_debit_note_amount
+	import get_advance_vouchers
 
 def execute(filters=None):
 	validate_filters(filters)
@@ -16,6 +16,22 @@ def execute(filters=None):
 	res = get_result(filters)
 
 	return columns, res
+#function from v13
+def get_debit_note_amount(suppliers, from_date, to_date, company=None):
+
+	filters = {
+		"supplier": ["in", suppliers],
+		"is_return": 1,
+		"docstatus": 1,
+		"posting_date": ["between", (from_date, to_date)],
+	}
+	fields = ["abs(sum(net_total)) as net_total"]
+
+	if company:
+		filters["company"] = company
+
+	return frappe.get_all("Purchase Invoice", filters, fields)[0].get("net_total") or 0.0
+
 
 def validate_filters(filters):
 	''' Validate if dates are properly set and lie in the same fiscal year'''

@@ -123,6 +123,10 @@ doc_events = {
 	"Rodtap Claimed Management":{
 		"on_submit":"ushanti.ushanti.doctype.rodtap_claimed_management.rodtap_claimed_management.create_jv_on_submit"
 	},
+	"Delivery Note":{
+		"on_submit" : "ushanti.ushanti.doc_event.delivery_note.on_submit",
+		"before_cancel":"ushanti.ushanti.doc_event.delivery_note.before_cancel"
+	}
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
@@ -132,6 +136,10 @@ doc_events = {
 
 # Scheduled Tasks
 # ---------------
+override_whitelisted_methods = {
+	"erpnext.stock.doctype.purchase_receipt.purchase_receipt.make_purchase_invoice":"ushanti.api.make_purchase_invoice",
+}
+
 
 scheduler_events = {
 # 	"all": [
@@ -169,9 +177,9 @@ scheduler_events = {
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "ushanti.task.get_dashboard_data"
-# }
+override_doctype_dashboards = {
+	"Inward Sample": "ushanti.ushanti.doc_event.inward_sample_dashboard"
+}
 
 # exempt linked doctypes from being automatically cancelled
 #
@@ -218,14 +226,18 @@ tds_computation_summary.execute = tds_computation_summary_execute
 # from ushanti.ushanti.report.tds_payable_monthly import execute as tds_payable_monthly_execute
 # tds_payable_monthly.execute = tds_payable_monthly_execute
 
-from erpnext.regional.doctype.gstr_3b_report.gstr_3b_report import GSTR3BReport
+from india_compliance.gst_india.doctype.gstr_3b_report.gstr_3b_report import GSTR3BReport
 from ushanti.ushanti.report.gstr_3b_report import GSTR3BReport as custom_GSTR3BReport
 GSTR3BReport.validate = custom_GSTR3BReport.validate
 
-from erpnext.regional.report.provident_fund_deductions import provident_fund_deductions
+from hrms.payroll.report.provident_fund_deductions import provident_fund_deductions
 from ushanti.ushanti.report.provident_fund_deductions import execute as override_report_execute
 provident_fund_deductions.execute = override_report_execute
 
 from erpnext.selling.doctype.sales_order import sales_order
 from ushanti.ushanti.doc_event.sales_order import make_sales_invoice
 sales_order.make_sales_invoice = make_sales_invoice
+
+from chemical.chemical.doc_events import stock_entry 
+from ushanti.ushanti.doc_event.stock_entry import update_po_transfer_qty
+stock_entry.update_po_transfer_qty = update_po_transfer_qty
