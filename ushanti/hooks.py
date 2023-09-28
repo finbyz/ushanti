@@ -177,9 +177,9 @@ scheduler_events = {
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
-override_doctype_dashboards = {
-	"Inward Sample": "ushanti.ushanti.doc_event.inward_sample_dashboard"
-}
+# override_doctype_dashboards = {
+# 	"Inward Sample": "ushanti.ushanti.doc_event.inward_sample_dashboard"
+# }
 
 # exempt linked doctypes from being automatically cancelled
 #
@@ -241,3 +241,7 @@ sales_order.make_sales_invoice = make_sales_invoice
 from chemical.chemical.doc_events import stock_entry 
 from ushanti.ushanti.doc_event.stock_entry import update_po_transfer_qty
 stock_entry.update_po_transfer_qty = update_po_transfer_qty
+
+from india_compliance.gst_india.report.gstr_1.gstr_1 import Gstr1Report
+from ushanti.gstr_1 import get_row_data_for_invoice
+Gstr1Report.get_row_data_for_invoice = get_row_data_for_invoice

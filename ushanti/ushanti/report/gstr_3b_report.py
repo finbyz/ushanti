@@ -195,7 +195,7 @@ def get_outward_tax_invoices(self, doctype, reverse_charge=None):
 	condition = ''
 
 	if reverse_charge:
-		condition += "AND reverse_charge = 'Y'"
+		condition += "AND is_reverse_charge = 'Y'"
 
 	invoice_details = frappe.db.sql("""
 		SELECT
@@ -400,7 +400,7 @@ def get_account_heads(self):
 
 	account_heads = {}
 	gst_settings_accounts = frappe.get_all("GST Account",
-		filters={'company': self.company, 'is_reverse_charge_account': 0},
+		filters={'company': self.company, 'account_type': 'Reverse Charge'},
 		fields=["cgst_account", "sgst_account", "igst_account", "cess_account"])
 
 	if not gst_settings_accounts:
@@ -446,7 +446,7 @@ def get_itc_jv_amount(self):
 		this function is used to get itc amount of igst, cgst,sgst, cess amount from journal entry
 	"""
 	gst_settings_accounts = frappe.get_all("GST Account",
-		filters={'company': self.company, 'is_reverse_charge_account': 0},
+		filters={'company': self.company, 'account_type': 'Reverse Charge'},
 		fields=["cgst_account", "sgst_account", "igst_account", "cess_account"])
 
 	if not gst_settings_accounts:

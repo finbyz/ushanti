@@ -1,0 +1,39 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2023-07-31 17:44:17.589975",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "Setup",
+ "engine": "InnoDB",
+ "field_order": [
+  "industry"
+ ],
+ "fields": [
+  {
+   "fieldname": "industry",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Industry",
+   "oldfieldname": "industry",
+   "oldfieldtype": "Data",
+   "reqd": 1
+  }
+ ],
+ "icon": "fa fa-flag",
+ "istable": 1,
+ "links": [],
+ "modified": "2023-08-08 16:36:40.114691",
+ "modified_by": "Administrator",
+ "module": "Ushanti",
+ "name": "Industry Types",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "translated_doctype": 1
+}

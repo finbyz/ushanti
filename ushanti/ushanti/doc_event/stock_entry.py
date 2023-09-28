@@ -1,4 +1,5 @@
 import frappe
+from frappe.utils import flt
 
 def update_po_transfer_qty(self, po):
 	for d in po.required_items:
