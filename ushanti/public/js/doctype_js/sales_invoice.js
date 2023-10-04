@@ -1,6 +1,14 @@
 frappe.ui.form.on('Sales Invoice', {
 	onload: function(frm){
 	    frm.ignore_doctypes_on_cancel_all = ["Delivery Note"]
+        frm.set_query("selling_price_list", function() {
+            return {
+                "filters": {
+                    "company":frm.doc.company,
+                    "selling":1
+                }
+            };
+        });
 	},
 	refresh:function(frm){
 	    frm.ignore_doctypes_on_cancel_all = ["Delivery Note"]

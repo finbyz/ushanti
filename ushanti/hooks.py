@@ -20,7 +20,10 @@ app_license = "MIT"
 # app_include_css = "/assets/ushanti/css/ushanti.css"
 # app_include_js = "/assets/ushanti/js/ushanti.js"
 
-app_include_js = "/assets/js/ushanti.min.js"
+# app_include_js = "/assets/js/ushanti.min.js"
+app_include_js = [
+	"ushanti.bundle.js"
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/ushanti/css/ushanti.css"
@@ -48,8 +51,14 @@ override_doctype_class = {
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 doctype_js = {
+	"Quotation" : "public/js/doctype_js/quotation.js",
+	"Sales Order" : "public/js/doctype_js/sales_order.js",
+	"Delivery Note": "public/js/doctype_js/delivery_note.js",
 	"Sales Invoice" : "public/js/doctype_js/sales_invoice.js",
-	"Journal Entry" : "public/js/doctype_js/journal_entry.js"
+	"Journal Entry" : "public/js/doctype_js/journal_entry.js",
+	"Purchase Order" : "public/js/doctype_js/purchase_order.js",
+	"Purchase Receipt" : "public/js/doctype_js/purchase_receipt.js",
+	"Purchase Invoice" : "public/js/doctype_js/purchase_invoice.js"
 	}
 
 # Home Pages
