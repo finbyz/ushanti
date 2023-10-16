@@ -58,7 +58,8 @@ doctype_js = {
 	"Journal Entry" : "public/js/doctype_js/journal_entry.js",
 	"Purchase Order" : "public/js/doctype_js/purchase_order.js",
 	"Purchase Receipt" : "public/js/doctype_js/purchase_receipt.js",
-	"Purchase Invoice" : "public/js/doctype_js/purchase_invoice.js"
+	"Purchase Invoice" : "public/js/doctype_js/purchase_invoice.js",
+	"Lead" : "public/js/doctype_js/lead.js"
 	}
 
 # Home Pages
@@ -132,6 +133,11 @@ doc_events = {
 	"Rodtap Claimed Management":{
 		"on_submit":"ushanti.ushanti.doctype.rodtap_claimed_management.rodtap_claimed_management.create_jv_on_submit"
 	},
+	# "Quality Inspection": {
+	# 	"validate": "ushanti.ushanti.doc_event.quality_inspection.validate",
+	# 	"on_submit":"ushanti.ushanti.doc_event.quality_inspection.before_submit",
+	# 	"on_cancel": "ushanti.ushanti.doc_event.quality_inspection.on_cancel"
+	# },
 	"Delivery Note":{
 		"on_submit" : "ushanti.ushanti.doc_event.delivery_note.on_submit",
 		"before_cancel":"ushanti.ushanti.doc_event.delivery_note.before_cancel"
