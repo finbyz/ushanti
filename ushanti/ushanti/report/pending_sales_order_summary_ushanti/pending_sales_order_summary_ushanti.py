@@ -201,7 +201,7 @@ def get_data(filters):
 			and `tabSales Order`.docstatus < 2
 			and `tabCustomer Group`.`customer_group_name` = `tabSales Order`.`customer_group`
 			and `tabItem`.name = `tabSales Order Item`.item_code
-			and `tabSales Order`.status not in ("Stopped", "Closed")
+			and `tabSales Order`.status not in ("Stopped", "Closed", "Completed")
 			and ifnull(`tabSales Order Item`.delivered_qty,0) < ifnull(`tabSales Order Item`.qty,0)
 			and  `tabSales Order`.company = '{filters.get('company')}'
 			

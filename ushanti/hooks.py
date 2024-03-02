@@ -153,6 +153,7 @@ doc_events = {
 # ---------------
 override_whitelisted_methods = {
 	"erpnext.stock.doctype.purchase_receipt.purchase_receipt.make_purchase_invoice":"ushanti.api.make_purchase_invoice",
+	"erpnext.buying.doctype.purchase_order.purchase_order.make_purchase_invoice": "ushanti.api.make_purchase_invoice_from_purchase_order",
 }
 
 

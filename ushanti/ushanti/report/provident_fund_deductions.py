@@ -165,7 +165,7 @@ def get_data(filters = {"company" : "USHANTI COLOUR CHEM LIMITED - HRD" , "month
 		get_basic = frappe.db.sql(f""" SELECT  sd.salary_component , sd.amount
 									From `tabSalary Structure Assignment` as ssa
 									left join `tabSalary Detail` as sd ON sd.parent = ssa.salary_structure
-									Where employee = '{row.get("employee")}' and ssa.docstatus = 1 and sd.salary_component = "Basic" ORDER BY ssa.from_date DESC limit 1""", as_dict=1)
+									Where employee = '{row.get("employee")}' and ssa.docstatus = 1 and sd.salary_component IN ("Basic","Basic - 1") ORDER BY ssa.from_date DESC limit 1""", as_dict=1)
 		
 		uan_no = frappe.db.get_value("Employee" , row.get('employee') , 'uan_no')
 		if get_basic:
